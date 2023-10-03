@@ -93,21 +93,21 @@ function App() {
     <div className=" flex justify-center items-center h-[100vh] w-full md:w-[450px] text-white md:mx-auto bg-[#121212]">
       <div className=" p-3 md:p-6 flex w-full h-full">
         <div className=' w-full'>
-          <div className=" py-3 flex w-full justify-between items-center border-b-8 border-[#cbcbcb6c]">
+          <div className=" py-3 flex w-full justify-between items-center border-b border-[#cbcbcb6c]">
             <span className="">
               <p className=" font-Nunito-Sans font-semibold text-xl flex flex-row">BTC/USDT <span className=" text-[#30B278] text-base font-normal flex flex-row items-center ml-3">  0.014% <img src={ arrDown } className=' h-4 w-4 ' alt="" /></span></p>
               <p className=' text-[#ffffffcc] font-Nunito-Sans text-base'>Perpetual</p>
             </span>
             <img src={ chart } className=' w-4 h-4' alt="" />
           </div>
-          <div className=' w-full py-4 flex flex-row space-x-4 border-b border-[#ffffff88]'>
+          <div className=' w-full py-4 flex flex-row space-x-4 border-b border-[#cbcbcb6c]'>
             <button className=' font-Nunito text-sm px-4 py-2 rounded-2xl text-whitef3ad26 bg-[#f3ad26]'>Isolated</button>
             <button className=' font-Nunito text-sm px-4 py-2 rounded-2xl text-whitef3ad26 bg-[#f3ad26]'>10x</button>
           </div>
 
-          <div className=' py-3 flex flex-row justify-between border-b-8 border-[#cbcbcb6c]'>
+          <div className=' py-3 flex flex-row justify-between border-b border-[#cbcbcb6c]'>
             <div className=' w-[59%]'>
-            <div className='w-full h-[35px] bg-[#ffffff65] rounded-3xl'>
+            <div className='w-full h-[35px] bg-[#1e1e1e] rounded-3xl'>
                 <button
                   className={`w-1/2 h-full ${
                     buySellButton === 'buy' ? 'bg-[#f3ad26] rounded-3xl' : ''
@@ -130,9 +130,9 @@ function App() {
                 <p className=' font-Nunito-Sans text-sm font-medium text-[#ffffffcc]'>0</p>
               </div>
               <div className=' px-1 w-full space-y-3'>
-                <input type="text" placeholder="Limit" className=' w-full p-2 text-sm font-Nunito-Sans font-medium text-center bg-[#ffffff88] rounded-lg' readOnly value={"Limit"}/>
-                <input type="text" placeholder="Amount" className=' w-full p-2 text-sm font-Nunito-Sans font-medium text-center text-[#ffffffcc] bg-[#ffffff88] rounded-lg' readOnly value={unit * amount}/>
-                <input type="text" placeholder="0" className=' w-full p-2 text-sm font-Nunito-Sans font-medium text-center text-[#ffffffcc] bg-[#ffffff88] rounded-lg' value={unit}/>
+                <input type="text" placeholder="Limit" className=' w-full p-2 text-sm font-Nunito-Sans font-medium text-center bg-[#1e1e1e] rounded-lg' readOnly value={"Limit"}/>
+                <input type="text" placeholder="Amount" className=' w-full p-2 text-sm font-Nunito-Sans font-medium text-center text-[#ffffffcc] bg-[#1e1e1e] rounded-lg' readOnly value={unit * amount}/>
+                <input type="text" placeholder="0" className=' w-full p-2 text-sm font-Nunito-Sans font-medium text-center text-[#ffffffcc] bg-[#1e1e1e] rounded-lg' value={unit}/>
               </div>
               <div className='flex w-full justify-between pt-2 px-1'>
                 {buttons.map((button, index) => (
