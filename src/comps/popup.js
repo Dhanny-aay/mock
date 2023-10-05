@@ -1,45 +1,14 @@
-// import Popup from "./comps/popup";
+import arrDown from '../images/arrDown.svg';
+import chart from '../images/chart.svg';
 import { useState, useEffect } from 'react';
-import axios from 'axios';
-import arrDown from '../src/images/arrDown.svg';
-import chart from '../src/images/chart.svg';
-import close from '../src/images/close.svg';
 
 
-function App() {
+const Popup = () => {
 
-  const [dataSet, setDataSet] = useState([]);
-  const [tradeName, setTradeName] = useState('BTC');
-  const [tradePopup, setTradePopup] = useState(false);
-  const [amount, setAmount] = useState(26140.58);
-
-  useEffect(() => {
-    // Define the API endpoint
-    const apiUrl = 'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=false&locale=en';
-
-    // Use Axios to fetch data from the API
-    axios
-      .get(apiUrl)
-      .then((response) => {
-        const allExchanges = response.data;
-        setDataSet(allExchanges.slice(0, 15));
-      })
-      .catch((error) => {
-        // Handle error
-        console.error('Error fetching data:', error);
-      });
-}, []);
-// console.log(dataSet)
-
-// Function to determine CSS class based on price change
-const getPriceChangeClass = (change) => {
-    return change >= 0 ? 'positive' : 'negative';
-};
-
-
-const [activeButtonIndex, setActiveButtonIndex] = useState(0);
+    const [activeButtonIndex, setActiveButtonIndex] = useState(0);
   const [buySellButton, setBuySellButton] = useState('buy');
-  const [unit, setUnit] = useState(1); 
+  const [unit, setUnit] = useState(1);
+  const amount = 26140.58; 
   const quantity = 0.0638;
   const [price1, setPrice1] = useState([]) ;
   const [price2, setPrice2] = useState([]) ;
@@ -117,66 +86,14 @@ const [activeButtonIndex, setActiveButtonIndex] = useState(0);
     return () => clearInterval(interval);
   }, [amount, quantity]);
 
-const getTradeinfo = (e)=>{
-  const btnParent = e.target.parentElement;
-  const parentParent = btnParent.parentElement;
-  const elements = parentParent.children;
-  const nameInfo = elements[0].children;
-  const priceInfo = elements[1].innerHTML;
-  const nameInfoElements = nameInfo[0].children;
-  const name = nameInfoElements[1].innerHTML;
-  const price = parseInt(priceInfo.replace("$", ""));
-  setAmount(price)
-  setTradeName(name);
-  setTradePopup(true);
-}
-
-  return (
-    <>
-    <div className='w-full mt-[1.5em] p-4 border rounded-[15px] bg-[#1E1E1E33] border-[#EAEBF01A]'>
-                <table className=' w-[100%] font-Open-Sans text-sm text-white font-normal'>
-                    <thead>
-                        <tr className=' border-b border-[#EAEBF01A]'>
-                            <th className=' text-left font-Lato font-medium text-xs md:text-sm py-5 pl-2'>Crypto</th>
-                            <th className=' text-left font-Lato font-medium text-xs md:text-sm py-5 '>Current Price</th>
-                            <th className=' text-left font-Lato font-medium text-xs md:text-sm py-5 md-max:hidden'>Low (24h)</th>
-                            <th className=' text-left font-Lato font-medium text-xs md:text-sm py-5 md-max:hidden'>High (24h)</th>
-                            <th className=' text-left font-Lato font-medium text-xs md:text-sm py-5 '>Price Change (24h)</th>
-                            <th className=' text-left font-Lato font-medium text-xs md:text-sm py-5 '>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody className='font-Open-Sans text-sm text-white font-normal'>
-                    {dataSet.map((crypto, index) => (
-                        <tr className=' space-x- border-b border-[#EAEBF01A]' key={index}>
-                        <td className=''>
-                        <div className="crypto-info flex flex-row py-4 ml-2 space-x-2 items-center">
-                            <img
-                                src={crypto.image}
-                                alt={`${crypto.name}`}
-                                className=' w-[20px] h-[20px] lg:w-[32px] lg:h-[32px] rounded-[50%]'
-                            />
-                            <p className=' font-Open-Sans font-normal text-xs md:text-sm uppercase'>{crypto.symbol}</p>
-                        </div>
-                        </td>
-                        <td className='font-Open-Sans text-xs md:text-sm py-4  text-white font-normal' >${crypto.current_price}</td>
-                        <td className=' font-Open-Sans text-xs md:text-sm py-4 md-max:hidden text-white font-normal'>${crypto.low_24h}</td>
-                        <td className=' font-Open-Sans text-xs md:text-sm py-4 md-max:hidden text-white font-normal'>${crypto.high_24h}</td>
-                        <td className={getPriceChangeClass(crypto.price_change_percentage_24h)}>{crypto.price_change_percentage_24h}%</td>
-                        <td className=''><button onClick={ getTradeinfo } className=' bg-[#f3ad26] rounded-[20px] px-4 py-2 font-Lato font-normal text-xs md:text-sm'>Trade</button></td>
-                        </tr>
-                    ))}
-                    </tbody>
-                </table>
-            </div>
-            { tradePopup &&
-            <div className=' w-full h-[100vh] fixed z-[999] px-5 top-0 left-0 bg-[rgba(0,0,0,0.5)] flex justify-center items-center'> 
-            <div className=" flex justify-center items-center  w-full md:w-[450px] relative text-white md:mx-auto bg-[#121212]">
-            <img src={ close } className=' absolute top-3 right-3' onClick={()=>{setTradePopup(false)}} alt="" />
+    return ( 
+        <>
+        <div className=" flex justify-center items-center h-[100vh] w-full md:w-[450px] text-white md:mx-auto bg-[#121212]">
             <div className=" p-3 md:p-6 flex w-full h-full">
                 <div className=' w-full'>
                 <div className=" py-3 flex w-full justify-between items-center border-b border-[#cbcbcb6c]">
                     <span className="">
-                    <p className=" font-Nunito-Sans font-semibold text-xl flex flex-row uppercase">{tradeName}/USDT <span className=" text-[#30B278] text-base font-normal flex flex-row items-center ml-3">  0.014% <img src={ arrDown } className=' h-4 w-4 ' alt="" /></span></p>
+                    <p className=" font-Nunito-Sans font-semibold text-xl flex flex-row">BTC/USDT <span className=" text-[#30B278] text-base font-normal flex flex-row items-center ml-3">  0.014% <img src={ arrDown } className=' h-4 w-4 ' alt="" /></span></p>
                     <p className=' text-[#ffffffcc] font-Nunito-Sans text-base'>Perpetual</p>
                     </span>
                     <img src={ chart } className=' w-4 h-4' alt="" />
@@ -288,10 +205,8 @@ const getTradeinfo = (e)=>{
                 </div>
             </div>
         </div>
-        </div>
-        }
-    </>
-  );
+        </>
+     );
 }
-
-export default App;
+ 
+export default Popup;

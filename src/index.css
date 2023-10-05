@@ -5,13 +5,20 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #121212;
+  padding: 12px;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
-
+.positive {
+  color: #40C9A6;
+}
+.negative {
+  color: #F24D53;
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
